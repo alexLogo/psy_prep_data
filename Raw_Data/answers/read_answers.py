@@ -2,10 +2,11 @@ import pandas as pd
 import numpy as np
 from os import listdir
 
+from Raw_Data.utils.utils import number_to_string
 import Raw_Data.configurations as cfg
 
 def path_resolver(subject_num):
-    path = cfg.raw_data_path + cfg.participant_dir_name + str(subject_num) + '/' + cfg.answers_file_name
+    path = cfg.raw_data_path + cfg.participant_dir_name + number_to_string(subject_num) + '/' + cfg.answers_file_name
     return path
 
 
@@ -35,6 +36,9 @@ def read_answers(subject_num):
     
     # filter trials data
     data = filter_answer_file_question(data)
+    
+    # reset index
+    data.reset_index(inplace=True, drop=True)
     
     # no need for labeling in the moment 
     #data = label_trials_file_one_columns(data, col_id=1)
