@@ -35,7 +35,7 @@ def filter_reach_hesitation(df):
     movement = np.array(df[cfg.filter_column_of_interest])
     min_point = df[cfg.filter_column_of_interest].min()
     max_point = df[cfg.filter_column_of_interest].max()
-    medium_point = (max_point + min_point) / 2
+    medium_point = (max_point + min_point) *.5
     line = np.ones(len(movement)) * medium_point 
     reaching_point_indices = movement > line 
     length_of_hesitation = np.sum(reaching_point_indices)

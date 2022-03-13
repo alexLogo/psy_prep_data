@@ -4,9 +4,10 @@ import pandas as pd
 import Raw_Data.configurations as cfg
 from Raw_Data.utils.convert_groupby import convert_groupby_to_list
 from Raw_Data.utils.utils import number_to_string
+import pathes
 
 def path_resolver(subject_num):
-    path = cfg.raw_data_path + cfg.participant_dir_name + number_to_string(subject_num) + '/' + cfg.tracker_file_name
+    path = pathes.raw_data_path + cfg.participant_dir_name + number_to_string(subject_num) + '/' + cfg.tracker_file_name
     return path
 
 

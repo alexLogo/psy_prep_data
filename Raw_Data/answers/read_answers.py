@@ -4,9 +4,10 @@ from os import listdir
 
 from Raw_Data.utils.utils import number_to_string
 import Raw_Data.configurations as cfg
+import pathes
 
 def path_resolver(subject_num):
-    path = cfg.raw_data_path + cfg.participant_dir_name + number_to_string(subject_num) + '/' + cfg.answers_file_name
+    path = pathes.raw_data_path + cfg.participant_dir_name + number_to_string(subject_num) + '/' + cfg.answers_file_name
     return path
 
 

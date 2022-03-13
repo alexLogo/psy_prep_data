@@ -1,13 +1,8 @@
+import os
+import pathes
 # pathes
 # generate path of to data directories, without dependency on out locaation
 # relational data directories location should be fixed
-import os
-base_dir = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-raw_data_path = os.path.join(base_dir , 'Data\\raw data\\')
-raw_data_path = raw_data_path.replace(os.sep, '/')
-
-ts_data_path = os.path.join(base_dir , 'Data\\simple ts data\\')
-ts_data_path = ts_data_path.replace(os.sep, '/')
 
 
 # tracker data preprocessing configurations
@@ -36,6 +31,7 @@ trial_relevant_cols = ['SensoMotoric Delay', 'angleChange']
 filter_training = -1
 trials_file_name = ['trials.csv']
 trial_labels_dic = {(0,0): 0, (0.05,0): 1, (0.1,0):2, (0.15,0):3, (0,0.2126):4, (0,0.2867):5, (0,0.364):6}
+part_of_movement = pathes.trial_mode
 
 # for yoni:trial_labels_dic = {(0): 0, (0.033):1, (0.044):2, (0.066):3, (0.099):4, (0.154):5, (0.231):6, (0.352):7}
 
@@ -56,7 +52,7 @@ filter_expected_low = 0.75
 filter_expected_high = 0.94
 min_reaching = .07
 hesitation_threshold = 100
-
+too_short_trial = 10
 
 # interpolation
 rate_hz = 11

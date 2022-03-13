@@ -4,6 +4,7 @@ from Raw_Data.answers.read_answers import read_answers
 from Raw_Data.trials.read_trials import read_trials
 from Raw_Data.tracker_data.tracker_preprocessing import tracker_preprocessing
 from Raw_Data.utils.subject_threshold import threshold_filter
+from Raw_Data.utils.indices_of_interest import calculate_points_of_interest
 from timeseries_data.Timeseries_Data import TimeseriesData
 import Raw_Data.configurations as cfg
 
@@ -91,6 +92,10 @@ def raw_data_integration(subject_num):
     # create the header part of the data table
     header, header_size = create_header(trial_data, answer_data)
     
+    # if the trial_mode in 'all', we will add to the header of each trial indeices of points of interest
+    if cfg.pathes.trial_mode == 'all' and cfg.pathes.data_mode == 'handcraft':
+        header, header_size = calculate_points_of_interest(header, tracker_data)
+    
     # check if this subject meet data quantity thresholds
     if threshold_filter(header):
          return -1
@@ -106,4 +111,4 @@ def raw_data_integration(subject_num):
     
     return integrated_data 
 
-raw_data_integration(10)
+raw_data_integration(1)

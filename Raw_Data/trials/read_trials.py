@@ -4,13 +4,14 @@ from os import listdir
 
 from Raw_Data.utils.utils import number_to_string
 import Raw_Data.configurations as cfg
+import pathes
 
 
 def path_resolver(subject_num):
     if len(cfg.trials_file_name) == 1:
-        path = cfg.raw_data_path + cfg.participant_dir_name + number_to_string(subject_num) + '/' + cfg.trials_file_name[0]
+        path = pathes.raw_data_path + cfg.participant_dir_name + number_to_string(subject_num) + '/' + cfg.trials_file_name[0]
     else:
-        path = cfg.raw_data_path + cfg.participant_dir_name + number_to_string(subject_num) + '/' + cfg.trials_file_name[0]
+        path = pathes.raw_data_path + cfg.participant_dir_name + number_to_string(subject_num) + '/' + cfg.trials_file_name[0]
         suffix = [f for f in listdir(path) if f.startswith(cfg.trials_file_name[1])]
         
         path = path + '/' + suffix[0]

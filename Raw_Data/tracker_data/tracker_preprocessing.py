@@ -1,9 +1,10 @@
 import pandas as pd
 from Raw_Data.tracker_data.read_trackers import read_tracker
-from Raw_Data.tracker_data.filter_trials import filter_data
+from Raw_Data.tracker_data.filter_trials import filter_data, filter_short_trials
 from Raw_Data.tracker_data.intepolate import data_interpolation
 from Raw_Data.utils.timestamp_correction import timestamp_correction
 from Raw_Data.utils.indices_of_interest import idx_of_return, idx_of_start, idx_of_back
+import Raw_Data.configurations as cfg
 
 
 def reset_index(data):
@@ -28,7 +29,12 @@ def choose_relevent_parts(data, mode="all", ts_name='Hand_loc_Y'):
     for i,(_, df) in enumerate(data): 
         data[i] = (data[i][0], fun(df))
 
+    
+
     return data
+
+
+
 
 def timestamp_to_ms(data):
     for (_, df) in data:
@@ -57,7 +63,10 @@ def tracker_preprocessing(subject_num):
     data = filter_data(data)
     
     # choose relevant part of the trial
-    data = choose_relevent_parts(data, mode='movement')
+    data = choose_relevent_parts(data, mode=cfg.part_of_movement)
+    
+    # filter trials with to little amount of data left
+    data = filter_short_trials(data)
     
     # reset dataframe index
     data = reset_index(data)
@@ -70,5 +79,4 @@ def tracker_preprocessing(subject_num):
     
     
     return data 
-subject_num=21
-x = tracker_preprocessing(subject_num)
+data1 = tracker_preprocessing(7)

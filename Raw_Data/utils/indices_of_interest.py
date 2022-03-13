@@ -1,6 +1,8 @@
 import pandas as pd
 import numpy as np
+import Raw_Data.configurations as cfg
 from Raw_Data.utils.utils import convolve
+
 K = 10
 MOVEMENT_THRESHOLD = 0.002
 
@@ -45,3 +47,22 @@ def idx_of_start(ts):
         
     return -1
     
+
+
+
+def calculate_points_of_interest(header, data):
+    # calculate points of interest foreaech trial
+    point_of_interest = np.zeros((len(data), 3))
+    
+    for i,(_, df) in enumerate(data): 
+        ts = df[cfg.filter_column_of_interest]
+        start = idx_of_start(ts)
+        ret = idx_of_return(ts)
+        back = idx_of_back(ts)
+        point_of_interest[i] = [start, ret, back]
+    
+    # add results to header
+    point_of_interest = pd.DataFrame(point_of_interest)
+    header = pd.concat((header, point_of_interest), axis=1)
+ 
+    return header, header.shape[1]

@@ -1,4 +1,5 @@
 from Raw_Data.utils.filters import *
+import Raw_Data.configurations as cfg
 
 # this function gets subject tracker data and a filtering function
 # it filters the tracker data and return the number of filtered trials
@@ -33,4 +34,11 @@ def filter_data(data):
         filtered = filtering(data, fun)
         filtered_trials.append(filtered)
         
+    return data
+
+
+
+def filter_short_trials(data):
+    fun = lambda x:len(x) < cfg.too_short_trial
+    filtered = filtering(data, fun)
     return data

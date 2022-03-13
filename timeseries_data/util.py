@@ -1,6 +1,7 @@
 import numpy as np
 import pandas as pd
 import timeseries_data.configurations as cfg
+import pathes 
 
 def create_meta_string(header_size, num_of_ts, names):
     metastring = str(header_size)+','+str(num_of_ts)+','
@@ -46,9 +47,11 @@ def euclidian_combination(ts_lst):
 
 def path_resolver(mode, num):
     if mode == "base":
-        path = cfg.ts_data_path
+        path = pathes.ts_data_path
     elif mode == 'full kinematic':
-        path = cfg.full_kinematic_ts_data_path
+        path = pathes.full_kinematic_ts_data_path
+    elif mode == 'handcraft':
+        path = pathes.handcraft_features
         
     return path + 'participant' + str(num) + '.csv'
 

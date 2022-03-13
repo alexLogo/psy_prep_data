@@ -25,3 +25,4 @@ def number_to_string(num):
 def extract_subject_number(dir_name):
     num = int("".join(list(filter(str.isdigit, dir_name))))
     return num
+
