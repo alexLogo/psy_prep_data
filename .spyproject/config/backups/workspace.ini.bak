@@ -3,10 +3,10 @@ restore_data_on_startup = True
 save_data_on_exit = True
 save_history = True
 save_non_project_files = False
-project_type = 'empty-project-type'
-recent_files = ['Raw_Data\\tracker_data\\tracker_preprocessing.py', 'Raw_Data\\configurations.py', 'Raw_Data\\utils\\indices_of_interest.py', 'Raw_Data\\tracker_data\\filter_trials.py', 'Raw_Data\\utils\\utils.py', 'Raw_Data\\utils\\filters.py', 'Raw_Data\\tracker_data\\intepolate.py']
+project_type = empty-project-type
+recent_files = ['..\\..\\python - teaching\\exercises\\main.py']
 
 [main]
 version = 0.2.0
-recent_files = ['..\\..\\..\\..\\.spyder-py3\\temp.py']
+recent_files = []
 

@@ -63,7 +63,14 @@ class TimeseriesData():
             data_lst.append(self.get_ts(idx, name))
         ts_data = np.array(data_lst)
         return ts_data
-        
+    
+    def get_ts_range(self, idx, ts_range):
+        data_lst = []
+        for ts in ts_range:
+            ts += 1
+            data_lst.append(self.get_ts(idx, ts ))
+        ts_data = np.array(data_lst)
+        return ts_data
     
     def get_ts(self, row_idx, ts_idx):
         if isinstance(ts_idx, str):

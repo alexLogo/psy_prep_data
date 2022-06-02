@@ -1,3 +1,4 @@
+import numpy as np
 from sklearn.model_selection import StratifiedKFold
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import confusion_matrix, roc_auc_score
@@ -6,16 +7,30 @@ import classifications.configurations as cfg
 from classifications.utils.smote import create_synthetic_data, upsample_data
 import classifications.utils.util as util
 
-def evaluate(X, Y, model, validation_method, weight_flag=False, test_mode=False, smote=False, k=0):
-    # define validation method 
-    if validation_method == "cv":
+def validation_method_decision(validation_cfg, data_len):
+    if validation_cfg == "cv":
         kf = StratifiedKFold(n_splits=cfg.k_validation, shuffle=True, random_state=cfg.random_seed)
-    elif validation_method == "lto": # leave two out without repetitions
-        kf = StratifiedKFold(n_splits=len(X)//2, shuffle=True, random_state=cfg.random_seed)
+    elif validation_cfg == "lto": # leave two out without repetitions
+        kf = StratifiedKFold(n_splits=data_len//2, shuffle=True, random_state=cfg.random_seed)
     
+    return kf
+
+
+
+def evaluate(X, Y, model, validation_method='cv', weight_flag=False, test_mode=False, smote=False, k=0):
+    # define validation method 
+    kf = validation_method_decision(validation_method, len(X))
+
+    # initialize performance lists:
+    # results: confusion matrices
+    # total_true: list of "real label" order in the same way as "total_score"
+    # total_score: model probability score, used to calculate AUC
     results = []
     total_true = []
     total_score = []
+    
+    # initialize model_weights list
+    model_weights = []
     
     # iterate over the folds
     for train_index, test_index in kf.split(X, Y):
@@ -26,8 +41,6 @@ def evaluate(X, Y, model, validation_method, weight_flag=False, test_mode=False,
         weights_map = util.weights_calculation(y_train)
         
         
-        # create synthetic data
-        #x_train, y_train = create_synthetic_data(x_train, y_train, k=3)
         if smote:
             x_train, y_train = create_synthetic_data(x_train, y_train, k=k)
         else:
@@ -39,7 +52,8 @@ def evaluate(X, Y, model, validation_method, weight_flag=False, test_mode=False,
         else:
             weights = None
             
-        # standartize data
+        
+        # standardize data
         sc = StandardScaler()
         x_train = sc.fit_transform(x_train)
         x_test = sc.transform(x_test)
@@ -47,6 +61,8 @@ def evaluate(X, Y, model, validation_method, weight_flag=False, test_mode=False,
         # fit model        
         model.fit(x_train, y_train, sample_weight=weights)
         
+        # save model weights
+        model_weights.append(np.concatenate((model.intercept_, model.coef_.squeeze())))
         
         # calculate confusion matrix
         y_hat = model.predict(x_test)
@@ -76,7 +92,7 @@ def evaluate(X, Y, model, validation_method, weight_flag=False, test_mode=False,
     if test_mode:
         return auc, kf.split(X)
     
-    return auc, confusion
+    return auc, model_weights
 
 
 

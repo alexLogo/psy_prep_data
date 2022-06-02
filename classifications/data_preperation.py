@@ -3,6 +3,8 @@ from copy import deepcopy
 from feature_calculations.read_features import read_features
 from classifications.utils.filter_creator import create_filter
 from classifications.utils.labeler_creator import create_labeler
+from classifications.utils.normalize_featrues import feature_normalization
+
 import classifications.configurations as cfg
 
 
@@ -30,14 +32,19 @@ def labeling(data, idx, class_dict):
     
     return X, Y, Z
 
-def prepre_data(participant, filtering_cfg, labeling_cfg, reading_mode = "clean", data_read=False):
+def prepre_data(participant, filtering_cfg, labeling_cfg, reading_mode = "clean", data_read=False, feature_normalization_flag=-1):
     # read subject data
     if data_read:
         data = read_features(participant, reading_mode)
     else:
         data = participant
         
+    # check whether to normalize the features according to one of the labels
+    if feature_normalization_flag > 0:
+        data = feature_normalization(data, feature_normalization_flag)
+        
     data = np.array(data)
+    
     
     # choose relevant trials
     data = filter_trials(data, *filtering_cfg)

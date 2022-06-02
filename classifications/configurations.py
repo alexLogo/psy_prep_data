@@ -28,6 +28,13 @@ tests_random_configurations = [{'name': 'all manipulation', 'filter' :(1, [0,1,2
 test_random_names = ['id'] + [x['name'] for x in tests_random_configurations]
 
 
+objective_tests = [{'name': 'all manipulation', 'filter' :(1, [0,1,2,3]), 'labeler': (1, {0:0, 1:1, 2:1, 3:1}), 'validation':'cv', 'unconfound' : False},
+                    {'name': '100ms manipulation', 'filter' :(1, [0,1]), 'labeler': (1, {0:0, 1:1}), 'validation':'cv', 'unconfound' : False},
+                    {'name': '200ms manipulation', 'filter' :(1, [0,2]), 'labeler': (1, {0:0, 2:1}), 'validation':'cv', 'unconfound' : False},
+                    {'name': '300ms manipulation', 'filter' :(1, [0,3]), 'labeler': (1, {0:0, 3:1}), 'validation':'cv', 'unconfound' : False},
+                    {'name': 'unconcious manipulation', 'filter' :([1,2], [(0,1), (1,1)]), 'labeler': (1, {0:0, 1:1}), 'validation':'lto' , 'unconfound': False},]
+
+
 
 tests_configurations = [{'name': 'all manipulation', 'filter' :(1, [0,1,2,3]), 'labeler': (1, {0:0, 1:1, 2:1, 3:1}), 'validation':'cv', 'unconfound' : False},
                         {'name': 'all agency', 'filter' :(1, [0,1,2,3]), 'labeler': (2, {0:0, 1:1}), 'validation':'cv', 'unconfound' : False},
