@@ -24,9 +24,9 @@ def labeling(data, idx, class_dict):
     for i, row in enumerate(data):
         labels.append(labeler(row[:cfg.header_size]))
     
-    # Z is array that contain the manipulation type of each trial, we keep it in order be able to
-    # unconfound the data when performing agency classification
-    Z = data[:, 1]
+    # Z is array that contain the other label we keep it in order be able to
+    # apply more sophisticated calculations later on
+    Z = data[:, 3-idx]
     Y = np.array(labels)
     X = data[:, cfg.header_size:]
     
@@ -54,11 +54,15 @@ def prepre_data(participant, filtering_cfg, labeling_cfg, reading_mode = "clean"
     return X, Y, Z
 
 
-def prepre_data_all(data, filtering_cfg, labeling_cfg):
+def prepre_data_all(data, filtering_cfg, labeling_cfg, feature_normalization_flag=-1):
     data = deepcopy(data)
     for i in cfg.participants_range:
-        subject = np.array(data[i-1])
-    
+        subject = data[i-1]
+        if feature_normalization_flag > 0:
+            subject = feature_normalization(subject, feature_normalization_flag)
+        
+        subject = np.array(subject)
+        
         # choose relevant trials
         subject = filter_trials(subject, *filtering_cfg)
         

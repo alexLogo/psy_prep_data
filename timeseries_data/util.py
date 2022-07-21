@@ -1,3 +1,4 @@
+import os
 import numpy as np
 import pandas as pd
 import timeseries_data.configurations as cfg
@@ -52,7 +53,10 @@ def path_resolver(mode, num):
         path = pathes.full_kinematic_ts_data_path
     elif mode == 'handcraft':
         path = pathes.handcraft_features
-        
+    
+    if not os.path.isdir(path):
+        os.mkdir(path)
+    
     return path + 'participant' + str(num) + '.csv'
 
 

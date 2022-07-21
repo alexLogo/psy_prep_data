@@ -9,7 +9,6 @@ from feature_calculations.multicollinearity.util import drop_list, top_k_indices
 from feature_calculations.multicollinearity.Agglomerative import Agglomerative_clustring
 
 THRESHOLD = 5
-NUM_OF_SUBJECTS = 10
 EPOCH = 0
 
 
@@ -23,7 +22,7 @@ def calculate_vif(data, idx, fun=np.min):
     return value
 
 
-if __name__ == '__main__':
+def multicollinearaty_elimination():
     # read data
     print("Read data")
     data = [read_features(i, mode='clean') for i in range(1, cfg.subjects_for_multi_calculation+1)]
@@ -70,6 +69,10 @@ if __name__ == '__main__':
     print(f"Total: {len(eliminated_features)}")
     
     # delete correlated columns from all data
-    # update_subjects(eliminated_features, EPOCH)
-                
+    update_subjects(eliminated_features, EPOCH)
+
+
+
+if __name__ == '__main__':
+    multicollinearaty_elimination()    
                 

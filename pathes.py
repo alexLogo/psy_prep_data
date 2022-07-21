@@ -1,13 +1,21 @@
 import os
 
-data_mode = 'kinematic'
-trial_mode = 'all-minimal'
+num_of_subjects = 32
+
+dataset_mode = 'ophir'
+#data_mode = 'kinematic'
+data_mode = 'eyes'
+trial_mode = 'pupil_cut'
+#trial_mode = 'gaze'
+#trial_mode = 'all-minimal'
 
 data_type = 'all'
 #features_type = 'comprehensive'
 features_type = 'minimal'
 
 base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+base_dir = os.path.join(base_dir , f'{dataset_mode}\\')
+
 data_dir = os.path.join(base_dir , f'Data\\{data_mode}\\{trial_mode}\\')
 
 
@@ -80,3 +88,11 @@ result_no_mult_feature_path = result_no_mult_feature_path.replace(os.sep, '/')
 
 models_path = os.path.join(base_dir , f'results\\models\\{data_mode}\\{trial_mode}\\')
 models_path = models_path.replace(os.sep, '/')
+
+
+matrices_path = os.path.join(base_dir , f'results\\confusion matrix\\{data_mode}\\{trial_mode}\\')
+matrices_path = matrices_path.replace(os.sep, '/')
+
+
+sdt_path = os.path.join(base_dir , f'results\\meta\\')
+sdt_path = sdt_path.replace(os.sep, '/')

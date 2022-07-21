@@ -1,3 +1,4 @@
+import os
 import feature_calculations.configurations as cfg
 from feature_calculations.read_features import read_features
 
@@ -19,6 +20,9 @@ def drop(data, feature):
 
 
 def update_subjects(eliminited_features_list, epoch):
+    if not os.path.isdir(cfg.filtering_to_path[epoch]):
+        os.mkdir(cfg.filtering_to_path[epoch])
+    
     # delete correlated columns from all data
     for i in cfg.participants_range:
         print(f"rewriting participant {i}")

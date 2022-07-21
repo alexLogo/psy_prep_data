@@ -6,6 +6,10 @@ import Raw_Data.configurations as cfg
  
 
 def interpolate(data):
+    kind='cubic'
+    if cfg.pathes.trial_mode.startswith('pupil'):
+        kind =  'linear'   
+    
     original_time = np.array(data['timestamp'])
     new_time = np.arange(0, original_time[-1], cfg.rate_hz)
     
@@ -24,7 +28,7 @@ def interpolate(data):
             
             # interpolate
             # create interpolation function
-            f = interp1d(original_time,data_array, kind='cubic')
+            f = interp1d(original_time,data_array, kind=kind)
             
             # use the function to create new data points
             new_array = f(new_time)

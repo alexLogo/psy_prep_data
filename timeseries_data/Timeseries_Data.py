@@ -1,5 +1,6 @@
 import numpy as np
 import pandas as pd
+from copy import deepcopy
 import timeseries_data.util as util
 
 # temp
@@ -108,5 +109,18 @@ class TimeseriesData():
         self.ts_names.append(new_name)
         
         self.num_of_ts += 1
+        
+        
+    def split_data(self, idx):
+        new_ts_list = []
+        uniques = np.unique(self.data[:,idx])
+        
+        for label in uniques:
+            new_ts = deepcopy(self)
+            new_ts.data = self.data[self.data[:,idx]==label]
+            new_ts_list.append(new_ts)
+            
+        return new_ts_list
+        
 
 

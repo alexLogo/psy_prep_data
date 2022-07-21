@@ -6,6 +6,8 @@ from Raw_Data.utils.utils import extract_subject_number
 import pathes
 
 if __name__ == "__main__":
+    if not os.path.isdir(pathes.ts_data_path):
+        os.mkdir(pathes.ts_data_path)
     idx_counter = 1
     log = ""
     for dir_name in os.listdir(pathes.raw_data_path):
@@ -25,6 +27,8 @@ if __name__ == "__main__":
             log += f"subject {subject_num} don't have enough trials\n"
             continue
         log += f"subject {subject_num} -> participant{idx_counter}\n"
+        
+        
         
         path = pathes.ts_data_path+"participant"+str(idx_counter)+".csv"
         ts_data.to_csv(path)

@@ -97,7 +97,7 @@ def raw_data_integration(subject_num):
         header, header_size = calculate_points_of_interest(header, tracker_data)
     
     # check if this subject meet data quantity thresholds
-    if threshold_filter(header):
+    if threshold_filter(header) or len(tracker_data) == 0:
          return -1
     
     # create the data part of the data table
@@ -111,4 +111,3 @@ def raw_data_integration(subject_num):
     
     return integrated_data 
 
-raw_data_integration(1)

@@ -25,9 +25,16 @@ def filtering(data, filter_fun):
 
 
 def filter_data(data):
-    filtering_functions = [filter_short_trial, filter_short_movement, 
+    filtering_functions_hand = [filter_short_trial, filter_short_movement, 
                            filter_long_movement, filter_no_reach_movement,
                            filter_reach_hesitation]
+    filtering_functions_pupil = []
+    
+    if False: #cfg.pathes.trial_mode == 'pupil':
+        filtering_functions = filtering_functions_pupil
+    else:
+        filtering_functions = filtering_functions_hand
+        
     filtered_trials = []
     
     for fun in filtering_functions:

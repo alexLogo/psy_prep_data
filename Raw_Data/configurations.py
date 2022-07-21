@@ -10,11 +10,17 @@ tracker_file_name = "TrackersOutputData.csv"
 relevant_rows_filter = [(3, "Room"), (4, "NoBlockView")]
 unrelevant_trials = (-1, 0)
 tracker_idx_col = 'idx'
-tracker_relevant_data = [(1, tracker_idx_col), (6, 'timestamp'), (27, 'Hand_loc_X'), 
-                         (28, 'Hand_loc_Y'), (29, 'Hand_loc_Z'),
+tracker_relevant_data = [(1, tracker_idx_col), (6, 'timestamp'), (29, 'Hand_loc_Z'), (49, 'right_pupil'), 
+                         (50, 'left_pupil'),
                          ]
+to_drop = 'Hand_loc_Z'
+start_signal = 650
+# for hand: tracker_relevant_data = [(1, tracker_idx_col), (6, 'timestamp'), (27, 'Hand_loc_X'), (28, 'Hand_loc_Y'), (29, 'Hand_loc_Z'),]
+# for pupil: tracker_relevant_data = [(1, tracker_idx_col), (6, 'timestamp'), (29, 'Hand_loc_Z'), (49, 'right_pupil'), (50, 'left_pupil'),]
+    
 tracker_relevant_data_cols = [x[0] for x in tracker_relevant_data]
 tracker_relevant_data_names = [x[1] for x in tracker_relevant_data]
+
 
 
 # answers preprocessing configurations
@@ -30,9 +36,10 @@ trial_index = "#trial number"
 trial_relevant_cols = ['SensoMotoric Delay', 'angleChange']
 filter_training = -1
 trials_file_name = ['trials.csv']
-trial_labels_dic = {(0,0): 0, (0.05,0): 1, (0.1,0):2, (0.15,0):3, (0,0.2126):4, (0,0.2867):5, (0,0.364):6}
+trial_labels_dic = {(0,0): 0, (0.05,0): 1, (0.1,0):2, (0.15,0):3, (0.2,0):4}
 part_of_movement = pathes.trial_mode
 
+# for asaf:trial_labels_dic = {(0,0): 0, (0.05,0): 1, (0.1,0):2, (0.15,0):3, (0,0.2126):4, (0,0.2867):5, (0,0.364):6}
 # for yoni:trial_labels_dic = {(0): 0, (0.033):1, (0.044):2, (0.066):3, (0.099):4, (0.154):5, (0.231):6, (0.352):7}
 
 
@@ -44,13 +51,13 @@ numbers_mode = 3
 
 
 # filters
-filter_column_of_interest = 'Hand_loc_Y'
+filter_column_of_interest = 'Hand_loc_Z'
 filter_time_short = 600
 filter_movement_short = 0.15
-filter_movement_long = 0.65
+filter_movement_long = 0.8
 filter_expected_low = 0.75
 filter_expected_high = 0.94
-min_reaching = .07
+min_reaching = .1
 hesitation_threshold = 100
 too_short_trial = 10
 

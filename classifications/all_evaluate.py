@@ -8,6 +8,7 @@ from sklearn.model_selection import KFold, LeavePOut
 from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
+from sklearn.ensemble import RandomForestClassifier
 from classifications.utils.smote import create_synthetic_data, upsample_data
 from sklearn.metrics import confusion_matrix, classification_report, accuracy_score, roc_auc_score
 import warnings
@@ -85,7 +86,7 @@ def evaluate2(data, model, validation_method, weight_flag=False, test_mode=False
     total_score = []
     
     # iterate over the folds
-    for subject in range(len(data)):
+    for subject in range(len(data)-16):
         print(subject)
         train = [data[i] for i in range(len(data)) if i != subject]
         test = data[subject]
@@ -137,13 +138,13 @@ def threshold(labels, threshold):
     return min(counts) < threshold
 
 
-def analysis(model, test_set=cfg.tests_configurations, thresholds=cfg.class_threshold, weight_flag=False, 
-             feature_mode="clean", smote=False,k=0):
+def analysis(model, test_set=cfg.subjective_tests, thresholds=cfg.class_threshold, weight_flag=False, 
+             feature_mode="clean", smote=False,k=0, feature_normalization_flag=-1):
     
     data = read_all_data(mode=feature_mode)
     results = []
     for test in test_set:
-        test_data = prepre_data_all(data, test['filter'], test['labeler'])
+        test_data = prepre_data_all(data, test['filter'], test['labeler'], feature_normalization_flag=feature_normalization_flag)
         print(test['name'])
         # unconfound the data, if necessesry
         if test['unconfound']:
@@ -162,6 +163,7 @@ def analysis(model, test_set=cfg.tests_configurations, thresholds=cfg.class_thre
         
                 
 if __name__ == "__main__":
-    model =  LogisticRegression()
-    res = analysis(model, weight_flag=False, smote=False, feature_mode='handcraft')
-    save_all_results(res, "handcraft_cross")
+    model =  RandomForestClassifier(max_depth=5, n_estimators=1000)
+    model = LogisticRegression()
+    res = analysis(model, weight_flag=False, smote=False, feature_mode='clean', feature_normalization_flag=1)
+    #save_all_results(res, "handcraft_cross")

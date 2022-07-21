@@ -9,7 +9,7 @@ def key(x):
         return '@'+x
     return x
 
-if __name__ == "__main__":
+def sort_features():
     for i in cfg.participants_range:
         print(f"sorting participant {i}")
         data = read_features(i, mode='base')
@@ -18,5 +18,8 @@ if __name__ == "__main__":
         x = x.reindex(sorted(x.columns, key=key), axis=1)
         data  = pd.concat((header, x), axis=1)
         data.to_csv(pathes.base_feature_path+"participant"+str(i)+".csv", index=False)
-        
+
+
+if __name__ == "__main__":
+    sort_features()
         
