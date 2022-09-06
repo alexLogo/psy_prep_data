@@ -105,12 +105,12 @@ def analysis(model, test_set=cfg.tests_configurations, thresholds=cfg.class_thre
 
 if __name__ == "__main__":
     np.random.seed(cfg.np_seed)
-    name = "results3_obj_shuffle"
-    model =  LogisticRegression()
-    testset = [{'name': 'all agency', 'filter' :(1, [0,1,2,3]), 'labeler': (2, {0:0, 1:1}), 'validation':'cv', 'unconfound' : False}]
+    name = "rf_importance"
+    model =  RandomForestClassifier()
+    testset = [{'name': 'all agency', 'filter' :(1, [0,1,2,3,4]), 'labeler': (1, {0:0, 1:1, 2:1, 3:1, 4:1}), 'validation':'cv', 'unconfound' : False}]
     res, models, matrices = analysis(model, weight_flag=False, smote=False, k=5, test_set=testset[:1], 
-                   feature_mode='clean', feature_normalization_flag=-1, fitted_model=False, filename="results_pupil",
+                   feature_mode='mult', feature_normalization_flag=-1, fitted_model=False, filename="results_pupil",
                    covariat=False, iterations=1)
-    #util.save_results(res, name)
+    util.save_results(res, name)
     #util.save_matrices(matrices, name)
-    #util.save_models(models, name)
+    util.save_models(models, name)

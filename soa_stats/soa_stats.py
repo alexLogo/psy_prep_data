@@ -82,7 +82,16 @@ def filter_out(data, idx=1, exclude=[4]):
     data = data[~np.isin(data[:,idx], exclude)]
     return data
 
+
+def accuracy_calculation(data):
+    congruency = data[:,1] == 0
     
+    correct = congruency == data[:,2]
+    
+    return sum(correct) / len(correct)
+    
+
+  
 def subject_sensitivity_stats(subject_num, idx=-1,exclude=-1):
     results = []
     data = np.array(read_features(subject_num, mode='mult1'))
@@ -91,22 +100,31 @@ def subject_sensitivity_stats(subject_num, idx=-1,exclude=-1):
         data = filter_out(data, idx=idx, exclude=exclude)
     
     dprime, criterion = signal_detection_calculations(data)
+    accuracy = accuracy_calculation(data)
     
     # add results to results list
     results.append(dprime)
     results.append(criterion)
+    results.append(accuracy)
     
     return results
+ 
+
 
 def all_sensitivity_stats(idx=-1,exclude=-1):
     results = []
     for i in range(cfg.num_of_subjects):
         results.append(subject_sensitivity_stats(i+1, idx=idx,exclude=exclude))
-        
-    results = pd.DataFrame(results, columns=['dprime', 'bias'])
     
-    results.to_csv(pathes.sdt_path + "sensitivity_e4.csv", index=None)
+    
+    
+    results = pd.DataFrame(results, columns=['dprime', 'bias', 'accuracy'])
+    
+    results.to_csv(pathes.sdt_path + "sensitivity_acc.csv", index=None)
     
     return results
 
-x = all_sensitivity_stats(idx=1, exclude=[4])
+ 
+
+
+x = all_sensitivity_stats()

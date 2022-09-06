@@ -2,7 +2,7 @@ import pathes
 
 header_size = 3
 num_of_features = 8657
-num_of_participants = 5 #pathes.num_of_subjects
+num_of_participants = pathes.num_of_subjects
 cluster_size = [2,4,6,8]
 k_list = [5,7,10,15,20,25]
 

@@ -76,7 +76,8 @@ def evaluate(X, Y, Z, model, validation_method='cv', weight_flag=False, test_mod
             model_weights.append(np.concatenate((model.intercept_, model.coef_.squeeze())))      
             if covariat:
                 model.coef_ = model.coef_[1:]
-                
+        else:
+            model_weights.append(model.feature_importances_)
         
         # calculate confusion matrix
         y_hat = model.predict(x_test)

@@ -12,7 +12,7 @@ def path_resolver(mode):
         feature_path = pathes.base_clean_feature_path
     elif mode == "handcraft":
         feature_path = pathes.handcraft_features
-    elif mode == "mult1":
+    elif mode == "mult1" or mode == "mult":
         feature_path = pathes.multicoll_1_feature_path
     elif mode == "mult2":
         feature_path = pathes.multicoll_2_feature_path

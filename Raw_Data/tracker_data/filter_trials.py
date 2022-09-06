@@ -25,7 +25,7 @@ def filtering(data, filter_fun):
 
 
 def filter_data(data):
-    filtering_functions_hand = [filter_short_trial, filter_short_movement, 
+    filtering_functions_hand = [filter_short_movement, 
                            filter_long_movement, filter_no_reach_movement,
                            filter_reach_hesitation]
     filtering_functions_pupil = []

@@ -13,8 +13,9 @@ tracker_idx_col = 'idx'
 tracker_relevant_data = [(1, tracker_idx_col), (6, 'timestamp'), (29, 'Hand_loc_Z'), (49, 'right_pupil'), 
                          (50, 'left_pupil'),
                          ]
-to_drop = 'Hand_loc_Z'
-start_signal = 650
+tracker_relevant_data = [(1, tracker_idx_col), (6, 'timestamp'), (27, 'Hand_loc_X'), (28, 'Hand_loc_Y'), (29, 'Hand_loc_Z'),]
+to_drop = 0 # 'Hand_loc_Z'
+start_signal = 0
 # for hand: tracker_relevant_data = [(1, tracker_idx_col), (6, 'timestamp'), (27, 'Hand_loc_X'), (28, 'Hand_loc_Y'), (29, 'Hand_loc_Z'),]
 # for pupil: tracker_relevant_data = [(1, tracker_idx_col), (6, 'timestamp'), (29, 'Hand_loc_Z'), (49, 'right_pupil'), (50, 'left_pupil'),]
     
@@ -36,11 +37,12 @@ trial_index = "#trial number"
 trial_relevant_cols = ['SensoMotoric Delay', 'angleChange']
 filter_training = -1
 trials_file_name = ['trials.csv']
-trial_labels_dic = {(0,0): 0, (0.05,0): 1, (0.1,0):2, (0.15,0):3, (0.2,0):4}
+trial_labels_dic = {(0,0): 0, (0.05,0): 1, (0.1,0):2, (0.15,0):3, (0,0.2126):4, (0,0.2867):5, (0,0.364):6}
 part_of_movement = pathes.trial_mode
 
 # for asaf:trial_labels_dic = {(0,0): 0, (0.05,0): 1, (0.1,0):2, (0.15,0):3, (0,0.2126):4, (0,0.2867):5, (0,0.364):6}
 # for yoni:trial_labels_dic = {(0): 0, (0.033):1, (0.044):2, (0.066):3, (0.099):4, (0.154):5, (0.231):6, (0.352):7}
+# for ophir:trial_labels_dic = {(0,0): 0, (0.05,0): 1, (0.1,0):2, (0.15,0):3, (0.2,0):4}
 
 
 # reading files configuration

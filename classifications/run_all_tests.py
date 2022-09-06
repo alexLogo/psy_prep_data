@@ -13,9 +13,10 @@ from classifications.one_model_analysis import subjects_iterations
 if __name__ == "__main__":
     start = time.time()
     
-    name = 'rf_clean_v1'
-    mode = 'clean'
+    name = 'mult_model_cut_v1_lr'
+    mode = 'mult1'
     new_model = RandomForestClassifier(n_estimators=1000, max_depth=5)
+    new_model = LogisticRegression()
     
     
     # run AUC tailored
