@@ -9,25 +9,11 @@ def path_resolver(mode):
     if mode == "base":
         feature_path = pathes.base_feature_path
     elif mode == "clean":
-        feature_path = pathes.base_clean_feature_path
+        feature_path = pathes.clean_feature_path
     elif mode == "handcraft":
         feature_path = pathes.handcraft_features
-    elif mode == "mult1" or mode == "mult":
-        feature_path = pathes.multicoll_1_feature_path
-    elif mode == "mult2":
-        feature_path = pathes.multicoll_2_feature_path
-    elif mode == "mult3":
-        feature_path = pathes.multicoll_3_feature_path
-    elif mode == "mult4":
-        feature_path = pathes.multicoll_4_feature_path
-    elif mode == "mult5":
-        feature_path = pathes.multicoll_5_feature_path
-    elif mode == "mult6":
-        feature_path = pathes.multicoll_6_feature_path
-    elif mode == "mult7":
-        feature_path = pathes.multicoll_7_feature_path
-    elif mode == "kin base":
-        feature_path = pathes.base_kin_feature_path
+    elif mode == "minimal" or mode == "mult":
+        feature_path = pathes.minimal_feature_path
   
     return feature_path 
 

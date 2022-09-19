@@ -2,14 +2,11 @@ import numpy as np
 
 from statsmodels.stats.outliers_influence import variance_inflation_factor
 
-import pathes
 import feature_calculations.configurations as cfg
-from feature_calculations.read_features import read_k_subjects, read_features
-from feature_calculations.multicollinearity.util import drop_list, top_k_indices, update_subjects
-from feature_calculations.multicollinearity.Agglomerative import Agglomerative_clustring
+from feature_calculations.read_features import read_features
+from feature_calculations.multicollinearity.util import drop_list, update_subjects
 
 THRESHOLD = 5
-EPOCH = 0
 
 
 def calculate_vif(data, idx, fun=np.min):
@@ -69,7 +66,7 @@ def multicollinearaty_elimination():
     print(f"Total: {len(eliminated_features)}")
     
     # delete correlated columns from all data
-    update_subjects(eliminated_features, EPOCH)
+    update_subjects(eliminated_features)
 
 
 

@@ -13,9 +13,9 @@ from classifications.one_model_analysis import subjects_iterations
 if __name__ == "__main__":
     start = time.time()
     
-    name = 'mult_model_cut_v1_lr'
-    mode = 'mult1'
-    new_model = RandomForestClassifier(n_estimators=1000, max_depth=5)
+    name = 'test2'
+    mode = 'minimal'
+    #new_model = RandomForestClassifier(n_estimators=1000, max_depth=5)
     new_model = LogisticRegression()
     
     
@@ -27,7 +27,7 @@ if __name__ == "__main__":
     util.save_results(res, name)
     util.save_matrices(matrices, name)
     util.save_models(models, name)
-    
+    '''
     # run one_subject AUC
     model =  deepcopy(new_model)
     res, matrices = subjects_iterations(mode)
@@ -53,8 +53,7 @@ if __name__ == "__main__":
     model =  deepcopy(new_model)
     res, models, matrices = analysis(model, test_set=cfg.objective_tests[:1], feature_mode=mode, iterations=30)
     util.save_results(res, name+"_obj_shuffle")
-
-
+    '''
     end = time.time()
     print(f"Time: {end-start:.3f} sec")
 

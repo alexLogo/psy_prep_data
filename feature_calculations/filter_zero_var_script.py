@@ -9,8 +9,8 @@ import pathes
 def filter_zero():
     full_num_of_features = read_features(1).shape[1]
 
-    if not os.path.isdir(pathes.base_clean_feature_path):
-        os.mkdir(pathes.base_clean_feature_path)
+    if not os.path.isdir(pathes.clean_feature_path):
+        os.mkdir(pathes.clean_feature_path)
     idx_to_filter = np.zeros(full_num_of_features )
     idx_to_filter = np.array(idx_to_filter, dtype=bool)
     idx_counter = np.zeros(full_num_of_features )
@@ -31,7 +31,7 @@ def filter_zero():
         data = read_features(i)
         data = data[data.columns[~idx_to_filter]]
         
-        data.to_csv(pathes.base_clean_feature_path+"participant"+str(i)+".csv", index=False)
+        data.to_csv(pathes.clean_feature_path+"participant"+str(i)+".csv", index=False)
         
 if __name__ == "__main__":
     

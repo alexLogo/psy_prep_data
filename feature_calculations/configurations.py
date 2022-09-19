@@ -5,11 +5,6 @@ participants_range = range(1, num_of_subjects+1)
 
 subjects_for_multi_calculation = num_of_subjects
 minimum_unnan = 2
-filtering_base = ['clean', 'mult1', 'mult2', 'mult3', 'mult4', 'mult5', 'mult6']
-filtering_to_path = [pathes.multicoll_1_feature_path, pathes.multicoll_2_feature_path,
-                     pathes.multicoll_3_feature_path, pathes.multicoll_4_feature_path,
-                     pathes.multicoll_5_feature_path, pathes.multicoll_6_feature_path,
-                     pathes.multicoll_7_feature_path]
 
 
 
@@ -30,3 +25,14 @@ elif pathes.trial_mode == 'pupil' or pathes.trial_mode == 'pupil_cut':
     current_range = pupil_range
 else:
     current_range = full_range
+    
+    
+    
+# deprecated
+'''
+filtering_base = ['clean', 'mult1', 'mult2', 'mult3', 'mult4', 'mult5', 'mult6']
+filtering_to_path = [pathes.multicoll_1_feature_path, pathes.multicoll_2_feature_path,
+                     pathes.multicoll_3_feature_path, pathes.multicoll_4_feature_path,
+                     pathes.multicoll_5_feature_path, pathes.multicoll_6_feature_path,
+                     pathes.multicoll_7_feature_path]
+'''

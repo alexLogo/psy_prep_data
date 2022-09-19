@@ -19,7 +19,21 @@ def drop(data, feature):
     data.drop(feature, axis=1, inplace=True)
 
 
-def update_subjects(eliminited_features_list, epoch):
+def update_subjects(eliminited_features_list, epoch=-1):
+    
+    # delete correlated columns from all data
+    for i in cfg.participants_range:
+        print(f"rewriting participant {i}")
+        data = read_features(i, 'clean')
+        data.drop(eliminited_features_list, axis=1, inplace=True)
+        
+        data.to_csv(cfg.pathes.minimal_feature_path+"participant"+str(i)+".csv", index=False)
+
+
+
+'''
+deprecated
+def update_subjects(eliminited_features_list, epoch=):
     if not os.path.isdir(cfg.filtering_to_path[epoch]):
         os.mkdir(cfg.filtering_to_path[epoch])
     
@@ -30,3 +44,5 @@ def update_subjects(eliminited_features_list, epoch):
         data.drop(eliminited_features_list, axis=1, inplace=True)
         
         data.to_csv(cfg.filtering_to_path[epoch]+"participant"+str(i)+".csv", index=False)
+
+'''

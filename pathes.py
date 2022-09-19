@@ -1,13 +1,16 @@
 import os
 
-dataset_mode = 'ophir'
+dataset_mode = 'practice'
+
 data_mode = 'kinematic'
 #data_mode = 'eyes'
+
 #trial_mode = 'pupil_cut'
 #trial_mode = 'gaze'
 trial_mode = 'all-minimal'
 
 data_type = 'all'
+
 #features_type = 'comprehensive'
 features_type = 'minimal'
 
@@ -49,16 +52,16 @@ if not os.path.isdir(base_feature_path):
     os.mkdir(base_feature_path)
 
 
-base_clean_feature_path = os.path.join(data_dir , 'clean base feature data\\')
-base_clean_feature_path  = base_clean_feature_path .replace(os.sep, '/')
-if not os.path.isdir(base_clean_feature_path):
-    os.mkdir(base_clean_feature_path)
+clean_feature_path = os.path.join(data_dir , 'clean feature data\\')
+clean_feature_path  = clean_feature_path .replace(os.sep, '/')
+if not os.path.isdir(clean_feature_path):
+    os.mkdir(clean_feature_path)
 
 
-multicoll_1_feature_path = os.path.join(data_dir , 'multicollinearty 1 feature data\\')
-multicoll_1_feature_path  = multicoll_1_feature_path .replace(os.sep, '/')
-if not os.path.isdir(multicoll_1_feature_path):
-    os.mkdir(multicoll_1_feature_path)
+minimal_feature_path = os.path.join(data_dir , 'minimal feature data\\')
+minimal_feature_path  = minimal_feature_path .replace(os.sep, '/')
+if not os.path.isdir(minimal_feature_path):
+    os.mkdir(minimal_feature_path)
 
 # num of subjects is num of files in the timeseries data directory minus 1 (the log file)
 num_of_subjects = len(os.listdir(ts_data_path)) - 1

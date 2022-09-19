@@ -18,6 +18,8 @@ fake_participants_range = range(200, 225)
 
 restrictions = [10, 6, 6, 6, 6, 6, 6]
 
+
+# test structure: {'name': test name, 'filter': (col number, [chosen values]), 'labeler' : (col number, map value to label), 'validation': validation technique, 'unconfound' : deprecated}
 tests_random_configurations = [{'name': 'all manipulation', 'filter' :(1, [0,1,2,3]), 'labeler': (1, {0:0, 1:1, 2:1, 3:1}), 'validation':'cv', 'unconfound' : False},
                         {'name': 'all agency', 'filter' :(1, [0,1,2,3]), 'labeler': (2, {0:0, 1:1}), 'validation':'cv', 'unconfound' : False},
                         {'name': 'all agency unconfounded', 'filter' :(1, [0,1,2,3]), 'labeler': (2, {0:0, 1:1}), 'validation':'cv', 'unconfound' : True},
@@ -40,7 +42,7 @@ subjective_tests = [{'name': 'all agency', 'filter' :(1, [0,1,2,3]), 'labeler': 
                     {'name': '150ms agency', 'filter' :(1, [0,3]), 'labeler': (2, {0:0, 1:1}), 'validation':'cv', 'unconfound' : False},]
 
 
-if pathes.dataset_mode == 'ophir':
+if pathes.dataset_mode.endswith("new") or pathes.dataset_mode == 'ophir':
     objective_tests[0]['filter'] = (1, [0,1,2,3,4])
     objective_tests[0]['labeler'] = (1, {0:0, 1:1, 2:1, 3:1, 4:1})         
     objective_tests.insert(4, {'name': '200ms manipulation', 'filter' :(1, [0,4]), 'labeler': (1, {0:0, 4:1}), 'validation':'cv', 'unconfound' : False} )
