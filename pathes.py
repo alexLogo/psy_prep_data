@@ -1,13 +1,15 @@
 import os
 
-dataset_mode = 'practice'
+dataset_mode = 'asaf'
 
+# data_mode = 'eyes'
 data_mode = 'kinematic'
-#data_mode = 'eyes'
+# data_mode = 'eyes'
 
-#trial_mode = 'pupil_cut'
-#trial_mode = 'gaze'
+# trial_mode = 'pupil_cut'
+# trial_mode = 'gaze'
 trial_mode = 'all-minimal'
+# trial_mode = 'window'
 
 data_type = 'all'
 

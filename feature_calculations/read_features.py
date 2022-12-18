@@ -14,6 +14,8 @@ def path_resolver(mode):
         feature_path = pathes.handcraft_features
     elif mode == "minimal" or mode == "mult":
         feature_path = pathes.minimal_feature_path
+    else:
+        raise 'unrecognized mode'
   
     return feature_path 
 

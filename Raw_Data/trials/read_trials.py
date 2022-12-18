@@ -7,7 +7,22 @@ import Raw_Data.configurations as cfg
 import pathes
 
 
-def path_resolver(subject_num):
+def new_path_resolver(subject_num):
+    path = pathes.raw_data_path + cfg.participant_dir_name + number_to_string(subject_num) + '/Butterfly Predictions/'
+    inner_dir = [f for f in listdir(path) if f.startswith('Sub')][0]
+    path += inner_dir + '/UsedPlan/'
+
+    suffix = [f for f in listdir(path) if f.startswith(cfg.trials_file_name_prefix)]
+        
+    path = path + '/' + suffix[0]
+    
+    return path
+
+
+def path_resolver(subject_num, new=False):
+    if new:
+        return new_path_resolver(subject_num)
+    
     if len(cfg.trials_file_name) == 1:
         path = pathes.raw_data_path + cfg.participant_dir_name + number_to_string(subject_num) + '/' + cfg.trials_file_name[0]
     else:
@@ -45,7 +60,7 @@ def label_trials_file(df, col_id, tranfrom_dic=cfg.trial_labels_dic):
 
 def read_trials(subject_num):
     # resolve path of trials file
-    path = path_resolver(subject_num)
+    path = path_resolver(subject_num, new=True)
     
     # read trials data
     data = pd.read_csv(path)

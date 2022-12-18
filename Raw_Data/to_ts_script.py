@@ -18,6 +18,9 @@ if __name__ == "__main__":
         
         # extract subject number
         subject_num = extract_subject_number(dir_name)
+        if subject_num in cfg.exclusion_list:
+            log += f"subject {subject_num} was excluded\n"
+            continue
         print(subject_num)
         # get subject data
         ts_data = raw_data_integration(subject_num)

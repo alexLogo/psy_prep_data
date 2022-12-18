@@ -13,6 +13,55 @@ pupil_velocity_names = ['right_vel', 'left_vel']
 pupil_acceleration_names = ['right_acc', 'left_acc']
 
 
+gaze_right_loc = ['right_gaze_x', 'right_gaze_y']
+gaze_left_loc = ['left_gaze_x', 'left_gaze_y']
+gaze_right_vel = ['vel_right_gaze_x', 'vel_right_gaze_y']
+gaze_left_vel = ['vel_left_gaze_x', 'vel_left_gaze_y']
+gaze_right_acc = ['acc_right_gaze_x', 'acc_right_gaze_y']
+gaze_left_acc = ['acc_left_gaze_x', 'acc_left_gaze_y']
+
+
+
+def gaze_kinematics():
+    for idx in cfg.subject_range:
+        print(f'preprocessing participant {idx}')
+        # read subject
+        data = import_subject('base', idx)
+        
+        # add velocity_ts to right
+        for i in [0,1]:
+            data.create_new_ts(gaze_right_loc[i:i+1], gaze_right_vel[i], util.deravative)
+            
+        # add velocity_ts to left
+        for i in [0,1]:
+            data.create_new_ts(gaze_left_loc[i:i+1], gaze_left_vel[i], util.deravative)
+         
+        # add acceleration ts to right
+        for i in [0,1]:
+            data.create_new_ts(gaze_right_vel[i:i+1], gaze_right_acc[i], util.deravative)
+            
+        # add acceleration ts to left
+        for i in [0,1]:
+            data.create_new_ts(gaze_left_vel[i:i+1], gaze_left_acc[i], util.deravative)
+  
+                     
+        # add total_velocity right
+        data.create_new_ts(gaze_right_vel, 'total_vel_right', util.euclidian_combination)
+
+        # add total_velocity left
+        data.create_new_ts(gaze_left_vel, 'total_vel_left', util.euclidian_combination)
+        
+        # add total_velocity right
+        data.create_new_ts(gaze_right_acc, 'total_acc_right', util.euclidian_combination)
+
+        # add total_velocity left
+        data.create_new_ts(gaze_left_acc, 'total_acc_left', util.euclidian_combination)
+
+        
+        # write subject 
+        path = util.path_resolver('full kinematic', idx)
+        data.to_csv(path)
+
 
 def hand_kinematics():
     for idx in cfg.subject_range:
@@ -59,7 +108,9 @@ def pupil_diameter_kinematics():
 
 
 if __name__ == "__main__":
-    if cfg.cfg.pathes.trial_mode.startswith('pupil'):
+    if cfg.pathes.trial_mode.startswith('pupil'):
         pupil_diameter_kinematics()
+    elif cfg.pathes.trial_mode.startswith('gaze'):
+        gaze_kinematics()
     else:
         hand_kinematics()

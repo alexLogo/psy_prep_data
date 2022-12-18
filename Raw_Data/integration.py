@@ -10,7 +10,7 @@ import Raw_Data.configurations as cfg
 
 def get_data(subject_num):
     trial_data = read_trials(subject_num)
-    answer_data = read_answers(subject_num) 
+    answer_data = trial_data # read_answers(subject_num) 
     tracker_data = tracker_preprocessing(subject_num)
     
     return trial_data, answer_data, tracker_data

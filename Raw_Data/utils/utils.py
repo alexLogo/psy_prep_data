@@ -17,6 +17,7 @@ def convolve(data, window_size=10):
     return data
 
 def number_to_string(num):
+    return '_' + str(num) # for yoni
     if cfg.numbers_mode == 0:
         return str(num)
     num = num + 10 ** cfg.numbers_mode

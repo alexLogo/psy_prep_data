@@ -1,5 +1,6 @@
 import pandas as pd
 import numpy as np
+from copy import deepcopy
 import Raw_Data.configurations as cfg
 from Raw_Data.utils.utils import convolve
 
@@ -66,3 +67,21 @@ def calculate_points_of_interest(header, data):
     header = pd.concat((header, point_of_interest), axis=1)
  
     return header, header.shape[1]
+
+
+def idx_of_time(timestamp, time):
+    zero = timestamp.iat[0]
+    timestamp = timestamp - zero
+    normilized_timestamp = abs(timestamp - time)
+    return normilized_timestamp.argmin()
+
+def idx_of_window_start(timestamp):
+    return idx_of_time(timestamp, cfg.window_start)
+
+
+def idx_of_window_end(timestamp):
+    zero = timestamp.iat[0]
+    timestamp = timestamp - zero
+    timestamp = timestamp - cfg.window_end
+    timestamp = timestamp[timestamp <= 0]
+    return len(timestamp) - 1

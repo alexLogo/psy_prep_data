@@ -56,6 +56,15 @@ class TimeseriesData():
     def get_data(self, idx):
         return self.data[idx, self.header_size:]
     
+    
+    def get_ts_from_all_trials(self, idx):
+        if isinstance(idx, str):
+            idx = self.ts_names.index(idx)
+        begining_idx = self.header_size + (idx*self.ts_length)
+        all_trials_ts = self.data[:, begining_idx:begining_idx+self.ts_length]
+        all_trials_ts = [util.zero_strip(x) for x in all_trials_ts]
+        return all_trials_ts
+    
     def get_all_ts(self, idx, include_timestamp=False):
         data_lst = []
         for name in self.ts_names:

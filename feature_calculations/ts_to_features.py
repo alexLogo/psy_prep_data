@@ -66,4 +66,4 @@ def participant_to_features(participant_num, mode='full kinematic', setting='com
     
     return features_rep 
 if __name__ == "__main__":
-    x = participant_to_features(1, setting='minimal')
+    x = participant_to_features(1, setting=cfg.feature_extraction_mode)

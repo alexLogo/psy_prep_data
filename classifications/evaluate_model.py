@@ -102,6 +102,7 @@ def evaluate(X, Y, Z, model, validation_method='cv', weight_flag=False, test_mod
     # calculate confusion matrix
     confusion = sum(results)
     
+    # auc = (confusion[0,0] + confusion[1,1]) / np.sum(confusion)
     
     # in testing mode we will want to check whether the randomality is static (reproductability&static folds)
     if test_mode:

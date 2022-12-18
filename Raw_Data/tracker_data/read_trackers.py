@@ -1,12 +1,25 @@
 import numpy as np
 import pandas as pd
+import os
 
 import Raw_Data.configurations as cfg
 from Raw_Data.utils.convert_groupby import convert_groupby_to_list
 from Raw_Data.utils.utils import number_to_string
 import pathes
 
-def path_resolver(subject_num):
+def new_path_resolver(subject_num):
+    path = pathes.raw_data_path + cfg.participant_dir_name + number_to_string(subject_num) + '/Butterfly Predictions/'
+    inner_dir = [f for f in os.listdir(path) if f.startswith('Sub')][0]
+    path += inner_dir + '/'
+    filename = [x for x in os.listdir(path) if x.startswith(cfg.tracker_file_name_prefix)][0]
+    path += filename
+    return path
+
+
+
+def path_resolver(subject_num, new=False):
+    if new:
+        return new_path_resolver(subject_num)
     path = pathes.raw_data_path + cfg.participant_dir_name + number_to_string(subject_num) + '/' + cfg.tracker_file_name
     return path
 
@@ -45,8 +58,7 @@ def split_to_trials(df):
 
 def read_tracker(subject_num):
     # resolve path of trials file
-    path = path_resolver(subject_num)
-    
+    path = path_resolver(subject_num, new=True)
     # read trials data
     data = pd.read_csv(path)
     

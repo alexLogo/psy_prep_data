@@ -4,7 +4,7 @@ save_data_on_exit = True
 save_history = True
 save_non_project_files = False
 project_type = empty-project-type
-recent_files = ['classifications\\experiment_analysis.py', 'feature_calculations\\read_features.py', 'classifications\\evaluate_model.py', 'pathes.py', 'classifications\\run_all_tests.py', 'Raw_Data\\tracker_data\\filter_trials.py', 'Raw_Data\\to_ts_script.py', 'Raw_Data\\configurations.py']
+recent_files = ['timeseries_data\\full_kinematic_script.py', 'pathes.py', 'timeseries_data\\import_data.py', 'timeseries_data\\Timeseries_Data.py', 'timeseries_data\\util.py', 'soa_stats\\soa_stats.py', 'classifications\\run_all_tests.py', 'classifications\\one_model_analysis.py', 'feature_calculations\\read_features.py']
 
 [main]
 version = 0.2.0

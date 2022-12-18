@@ -1,7 +1,7 @@
 import numpy as np
+import configurations as cfg
 
-
-def threshold_filter(header, idx=1, threshold=20):
+def threshold_filter(header, idx=1, threshold=cfg.threshold):
     types = header.iloc[:,idx]
     types = np.array(types)
     _, counts = np.unique(types,return_counts=True)

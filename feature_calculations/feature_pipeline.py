@@ -14,4 +14,4 @@ if __name__ == "__main__":
     filter_zero()
     
     # multicollinearaty elimination
-    multicollinearaty_elimination()
+    multicollinearaty_elimination() 

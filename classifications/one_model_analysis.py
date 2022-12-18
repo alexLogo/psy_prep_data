@@ -80,8 +80,7 @@ def one_subject_model_base_analysis(model, subject=1, test_set=cfg.objective_tes
         
     return results, matrices
 
-def subjects_iterations(mode='mult1'):
-    model =  LogisticRegression()
+def subjects_iterations(mode, model):
     results = []
     matrices = []
     for i in cfg.participants_range:

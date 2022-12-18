@@ -6,7 +6,7 @@ participants_range = range(1, num_of_subjects+1)
 subjects_for_multi_calculation = num_of_subjects
 minimum_unnan = 2
 
-
+feature_extraction_mode = 'minimal'
 
 
 loc_range = range(3)
@@ -14,6 +14,7 @@ vel_range = range(3,7)
 acc_range = range(7,11)
 full_range = range(11)
 pupil_range = range(6)
+gaze_range = range(16)
 
 if pathes.data_type == 'location':    
     current_range = loc_range
@@ -23,6 +24,8 @@ elif pathes.data_type == 'acceleration':
     current_range = acc_range
 elif pathes.trial_mode == 'pupil' or pathes.trial_mode == 'pupil_cut':
     current_range = pupil_range
+elif pathes.trial_mode == 'gaze':    
+    current_range = gaze_range
 else:
     current_range = full_range
     
