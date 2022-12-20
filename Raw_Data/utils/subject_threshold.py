@@ -1,5 +1,7 @@
 import numpy as np
-import configurations as cfg
+import Raw_Data.configurations as cfg
+#Changed by Alexander Logovinsky
+#import configurations as cfg
 
 def threshold_filter(header, idx=1, threshold=cfg.threshold):
     types = header.iloc[:,idx]
