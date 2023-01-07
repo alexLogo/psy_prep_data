@@ -1,0 +1,20 @@
++------------+        +----------------+
+|  os        |        |  Raw_Data      |
++------------+        +----------------+
+                      |  configurations|
+                      +----------------+
+                      |  integration   |
+                      +----------------+
+                      |  utils        |
+                      +----------------+
+                                        |
++------------+                        +----------------+
+|  pathes    |                        |  Timeseries_Data|
++------------+                        +----------------+
+                                      |  TimeseriesData |
+                                      +----------------+
+
+dir_name: string                 idx_counter: int
+path: string                      log: string
+subject_num: string               f: file object
+ts_data: object                   log_path: string
