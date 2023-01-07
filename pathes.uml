@@ -1,0 +1,21 @@
++--------------------+
+           |                    |
+           |      MainApp       |
+           |                    |
+           +--------------------+
+           | - dataset_mode: str |
+           | - data_mode: str    |
+           | - trial_mode: str   |
+           | - data_type: str    |
+           | - features_type: str|
+           | - base_dir: str     |
+           | - data_dir: str     |
+           | - raw_data_path: str|
+           | - ts_data_path: str |
+           | - full_kinematic_ts_data_path: str |
+           | - base_feature_path: str |
+           | - clean_feature_path: str |
+           | - minimal_feature_path: str |
+           | - num_of_subjects: int |
+           | + create_folders()  |
+           +--------------------+
