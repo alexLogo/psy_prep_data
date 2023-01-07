@@ -1,4 +1,4 @@
-+------------+
+ +------------+
                                  |  MainWindow |
                                  +------------+
                                        |
@@ -19,5 +19,36 @@
        +---------------------------+  |  +-------------------+
        | BehavioralOutputProcessor |  |  | PysiologicalOutputPorcessor |
        +---------------------------+  |  +-------------------+
-This UML diagram shows that the MainWindow class has an instance of the Runner class, which in turn has instances of the InputProcessor, Integrator, BehavioralOutputProcessor
-and PysiologicalOutputPorcessor classes.
+                                          
+                                          
+       +-------------------+
+       |   InputProcessor  |
+       +-------------------+
+       | - base_dir: str   |
+       | - config_file: str|
+       | + combine_csv_files(base_dir: str, config_file: str) |
+       +-------------------+
+                                      
+                                          
+       +-------------------+
+       |   Integrator      |
+       +-------------------+
+       | + combine(data: List[Dict[str, Union[int, str]]]) -> List[Dict[str, Union[int, str]]]: |
+       +-------------------+
+       
+       
+       +-------------------+
+       | BehavioralOutputProcessor |
+       +-------------------+
+       | - data: List[Dict[str, Union[int, str]]] |
+       | + preprocess() -> List[Dict[str, Union[int, str]]]: |
+       | + process() -> List[Dict[str, Union[int, str]]]: |
+       +-------------------+
+       
+       +-------------------+
+       | PysiologicalOutputPorcessor |
+       +-------------------+
+       | - data: List[Dict[str, Union[int, str]]] |
+       | + preprocess() -> List[Dict[str, Union[int, str]]]: |
+       | + process() -> List[Dict[str, Union[int, str]]]: |
+       +-------------------+
