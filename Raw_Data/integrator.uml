@@ -1,0 +1,42 @@
++------------+
+|  pd        |
++------------+
+|  np        |
++------------+
++----------------+
+|  Raw_Data      |
++----------------+
+|  answers       |
++----------------+
+|  read_answers  |
++----------------+
+|  trials        |
++----------------+
+|  read_trials   |
++----------------+
+|  tracker_data  |
++----------------+
+|  tracker_preprocessing |
++----------------+
+|  utils        |
++----------------+
+|  subject_threshold    |
++----------------+
+|  indices_of_interest |
++----------------+
++----------------+
+|  Timeseries_Data|
++----------------+
+|  TimeseriesData |
++----------------+
+|  configurations|
++----------------+
+
+subject_num: string                                                                max_len: int
+trial_data: DataFrame                                                             num_of_ts: int
+answer_data: DataFrame                                                            num_of_trials: int
+tracker_data: list of tuples                                                      ts_representation: DataFrame
+df: DataFrame                                                                     desired_length: int
+to_delete: list of integers                                                       pad_length: int
+to_preserve: list of integers                                                     header: DataFrame
+header: DataFrame                                                                 data: numpy array
