@@ -1,0 +1,23 @@
++------------+
+                                 |  MainWindow |
+                                 +------------+
+                                       |
+                                       |
+                                       v
+                                 +------------+
+                                 |    Runner   |
+                                 +------------+
+                                       |
+                                       |
+                                       v
+       +---------------------------+  |  +-------------------+
+       |    InputProcessor         |  |  |  Integrator       |
+       +---------------------------+  |  +-------------------+
+                                       |
+                                       |
+                                       v
+       +---------------------------+  |  +-------------------+
+       | BehavioralOutputProcessor |  |  | PysiologicalOutputPorcessor |
+       +---------------------------+  |  +-------------------+
+This UML diagram shows that the MainWindow class has an instance of the Runner class, which in turn has instances of the InputProcessor, Integrator, BehavioralOutputProcessor
+and PysiologicalOutputPorcessor classes.
