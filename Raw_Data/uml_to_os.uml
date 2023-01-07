@@ -18,3 +18,56 @@ dir_name: string                 idx_counter: int
 path: string                      log: string
 subject_num: string               f: file object
 ts_data: object                   log_path: string
+import os
+import Raw_Data.configurations as cfg
+from Raw_Data.integration import raw_data_integration
+from timeseries_data.Timeseries_Data import TimeseriesData
+from Raw_Data.utils.utils import extract_subject_number
+import pathes
+
+def process_subject_data(subject_num):
+    # get subject data
+    ts_data = raw_data_integration(subject_num)
+
+    # if there is no sufficient amount of data in specific subject the function above will return -1 
+    if ts_data is -1:
+        return f"subject {subject_num} don't have enough trials"
+    return f"subject {subject_num} -> participant{idx_counter}"
+
+if __name__ == "__main__":
+    # create directory if it doesn't exist
+    if not os.path.isdir(pathes.ts_data_path):
+        os.mkdir(pathes.ts_data_path)
+
+    # initialize counter and log
+    idx_counter = 1
+    log = ""
+
+    # iterate over directories in raw data path
+    for dir_name in os.listdir(pathes.raw_data_path):
+        # skip if not a directory
+        path = os.path.join(pathes.raw_data_path, dir_name)
+        if not os.path.isdir(path):
+            continue
+        
+        # extract subject number
+        subject_num = extract_subject_number(dir_name)
+        # skip if in exclusion list
+        if subject_num in cfg.exclusion_list:
+            log += f"subject {subject_num} was excluded\n"
+            continue
+
+        # process subject data
+        result = process_subject_data(subject_num)
+        log += result + "\n"
+        
+        # save data to csv
+        if "don't have enough trials" not in result:
+        path+"participant"+str(idx_counter)+".csv"
+            ts_data.to_csv(path)
+            idx_counter += 1
+
+    # write log into file
+    log_path = os.path.join(pathes.ts_data_path, "log.txt")
+    with open(log_path, "w") as f:
+        f.write(log)
