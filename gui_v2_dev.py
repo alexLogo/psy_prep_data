@@ -34,7 +34,7 @@ class MainWindow(tk.Tk):
         self.combine_button = tk.Button(self.frame, text='Combine CSV files', command=self.combine_csv_files)
         self.combine_button.pack()
 
-    # define the browse_base_dir function
+            # define the browse_base_dir function
     def browse_base_dir(self):
         base_dir = filedialog.askdirectory()
         if base_dir:
@@ -48,10 +48,6 @@ class MainWindow(tk.Tk):
             self.config_entry.insert(0, config_file)
 
     # define the combine_csv_files function
-    def combine_csv_files(self):
-        base_dir = self.base_dir_entry.get()
-        
-     # define the combine_csv_files function
     def combine_csv_files(self):
         base_dir = self.base_dir_entry.get()
         config_file = self.config_entry.get()
@@ -69,9 +65,32 @@ class MainWindow(tk.Tk):
             with open(os.path.join(base_dir, 'results.csv'), 'r') as f:
                 header = f.readline().strip().split(',')
 
-            # display the column names in the GUI
-            self.logo_label.configure(image='')
-            self.logo_label.configure(text=', '.join(header))
+            # create a list of checkboxes to select the relevant columns
+            self.checkboxes = []
+            for col in header:
+                var = tk.IntVar()
+                cb = tk.Checkbutton(self.frame, text=col, variable=var)
+                cb.pack()
+                self.checkboxes.append((col, var))
+
+            # create a button to save the selection
+            self.save_button = tk.Button(self.frame, text='Save selection', command=self.save_selection)
+            self.save_button.pack()
         else:
             # show an error message if either the base directory or configuration file is missing
             self.show_error_message('Please enter a base directory and a configuration file')
+
+    # define the save_selection function
+    def save_selection(self):
+        # get the selected columns
+        selected_columns = [col for col, var in self.checkboxes if var.get()]
+
+        # write the selected columns to the relevant_data.py file
+        with open(os.path.join(base_dir, 'relevant_data.py'), 'w') as f:
+            f.write('COLUMNS = ' + str(selected_columns))
+
+# create the main window
+window = MainWindow()
+
+# run the main loop
+window.mainloop()
