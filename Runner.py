@@ -59,3 +59,4 @@ class PhysiologicalOutputProcessor:
             cls._instance = super().__new__(cls)
         return cls._instance
  
+runner = Runner()
